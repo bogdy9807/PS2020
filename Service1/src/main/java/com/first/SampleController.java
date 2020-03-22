@@ -1,7 +1,11 @@
 package com.first;
 
 import businesslogic.ClientBLL;
+import businesslogic.PrestatorBLL;
+import businesslogic.ProgramariServiceBLL;
+import businesslogic.ServiceBLL;
 import model.Client;
+import model.Prestator;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,30 +16,41 @@ import java.util.ArrayList;
 @RestController
 class DemoApplication {
 
-    private ArrayList<Integer> testList;
+    private PrestatorBLL prestatorBLL;
+    private ClientBLL clientBLL;
+    private ProgramariServiceBLL programariServiceBLL;
+    private ServiceBLL serviceBLL;
 
-    @GetMapping("/printList")
-    public String printList(){
-        testList = new ArrayList<Integer>();
-        testList.add(1);
-        testList.add(2);
-        testList.add(3);
-        return testList.toString();
+    public DemoApplication(){
+        prestatorBLL = new PrestatorBLL();
+        serviceBLL = new ServiceBLL();
+        clientBLL = new ClientBLL();
+        programariServiceBLL = new ProgramariServiceBLL();
     }
+
 
     @GetMapping("/printHello")
     public String hello() {
         return "Hello World INSFARSIT";
     }
 
-    @GetMapping("/showClienti")
+    @GetMapping("/afiseazaClienti")
     public String showAllCustomers(){
         ClientBLL x = new ClientBLL();
-        System.out.println("Clientul:" +  x.findById(1).getNume());
-        ArrayList<Client> xlist = x.selectAll();
+        //System.out.println("Clientul:" +  x.findById(1).getNume());
+        ArrayList<Client> xlist = clientBLL.selectAll();
         String s = new String();
         for(Client y: xlist) {
             s += y.getNume() + " ";
+        }
+        return s;
+    }
+
+    @GetMapping("/afiseazaPrestatori")
+    public String showAllProviders(){
+        String s = new String();
+        for(Prestator x: prestatorBLL.selectAll()){
+            s+=x.getNume() + " ";
         }
         return s;
     }
