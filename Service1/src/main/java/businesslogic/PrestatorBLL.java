@@ -1,9 +1,9 @@
 package businesslogic;
 
-import java.util.ArrayList;
-
 import dao.PrestatorDAO;
 import model.Prestator;
+
+import java.util.ArrayList;
 
 public class PrestatorBLL {
 
@@ -11,6 +11,10 @@ public class PrestatorBLL {
 
     public PrestatorBLL() {
         prestatorDAO = new PrestatorDAO();
+    }
+
+    public PrestatorBLL(PrestatorDAO dao){
+        prestatorDAO = dao;
     }
 
     public Prestator findById(int id) {

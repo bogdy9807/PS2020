@@ -33,3 +33,10 @@ Acest tip de user va putea sa se inregistreze cu calicatea de prestator, va pute
 
 Vizitatorul, adica utilizator temporar, va putea doar vizita magazinul si sa vizualizeze ofertele, fara insa a putea alege o oferta sau a trimite un mesaj unui vanzator, va putea avea optiunea de intregistrare ca si client sau ca si vanzator.
 
+## Unelte folosite
+
+Baza de date a fost construita folosing MySQL, iar conectarea la Intellij a fost facuta prin documentul .jar din folderun BDConnection. Conectarea web este facuta prin springboot.
+
+## Implementare
+
+S-au construit clasele aferente utilizatorulor si inca o clasa de login care ne ajuta sa diferentiem utilizatorii. Accesul la informatiile din baza de date este facut prin metodele din clasele ce se afla in pachetul 'dao'.

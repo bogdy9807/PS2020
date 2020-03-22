@@ -1,9 +1,9 @@
 package businesslogic;
 
-import java.util.ArrayList;
-
 import dao.ServiceDAO;
 import model.Service;
+
+import java.util.ArrayList;
 
 public class ServiceBLL {
 
@@ -11,6 +11,10 @@ public class ServiceBLL {
 
     public ServiceBLL() {
         serviceDAO = new ServiceDAO();
+    }
+
+    public ServiceBLL(ServiceDAO dao){
+        serviceDAO = dao;
     }
 
     public void insert(Service s) {

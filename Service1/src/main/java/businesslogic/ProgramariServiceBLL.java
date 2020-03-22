@@ -1,15 +1,19 @@
 package businesslogic;
 
-import java.util.ArrayList;
-
 import dao.ProgramariServiceDAO;
 import model.ProgramariService;
+
+import java.util.ArrayList;
 
 public class ProgramariServiceBLL {
 
     private ProgramariServiceDAO programariServiceDAO;
     public ProgramariServiceBLL() {
         programariServiceDAO = new ProgramariServiceDAO();
+    }
+
+    public ProgramariServiceBLL(ProgramariServiceDAO dao){
+        programariServiceDAO = dao;
     }
 
     public ProgramariService findById(int id) {

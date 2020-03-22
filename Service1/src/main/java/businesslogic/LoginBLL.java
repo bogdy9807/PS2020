@@ -1,9 +1,9 @@
 package businesslogic;
 
-import java.util.ArrayList;
-
 import dao.LoginDAO;
 import model.Login;
+
+import java.util.ArrayList;
 
 public class LoginBLL {
 
@@ -11,6 +11,10 @@ public class LoginBLL {
 
     public LoginBLL() {
         loginDAO = new LoginDAO();
+    }
+
+    public LoginBLL(LoginDAO dao){
+        loginDAO = dao;
     }
 
     public ArrayList<Login> selectAll(){

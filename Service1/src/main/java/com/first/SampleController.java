@@ -6,6 +6,7 @@ import businesslogic.ProgramariServiceBLL;
 import businesslogic.ServiceBLL;
 import model.Client;
 import model.Prestator;
+import model.Service;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,4 +55,16 @@ class DemoApplication {
         }
         return s;
     }
+
+    @GetMapping("/afiseazaService")
+    public String showServices(){
+        String s = new String();
+        s = "ID\t" + "prestator_id\t" + "Informatii\t" + "Nume\n";
+        for(Service x: serviceBLL.selectAll()){
+            s+= x.getId() + "\t" + x.getPrestator_id() + "\t" + x.getInformatii() + "\t" + x.getNume() + "\n";
+        }
+        return s;
+    }
+
+
 }

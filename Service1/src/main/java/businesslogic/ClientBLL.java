@@ -16,6 +16,10 @@ public class ClientBLL {
         clientDAO = new ClientDAO();
     }
 
+    public ClientBLL(ClientDAO dao){
+        clientDAO = dao;
+    }
+
     public Client findById(int id) {
         return clientDAO.findById(id);
     }
