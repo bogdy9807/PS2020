@@ -12,10 +12,10 @@ Practic prestatorii sunt patronii de service.
 
 Actorii din aceasta platforma sunt:
 
-_clientii
-_prestatorii
-_vizitatorii
-_administratorul
+1. clientii
+1. prestatorii
+1. vizitatorii
+1. administratorul
 
 ### Administraror
 
