@@ -25,13 +25,12 @@ public class TestClient {
     @Before
     public void init(){
         clientDAO = new ClientDAO();
-        clientBLL = new ClientBLL(clientDAO);
     }
 
     @Test
     public void testFindById() {
-        when(clientDAO.findById(0)).thenReturn(new Client(0, "Default", "Default", "Default"));
-        assertEquals("Default", clientBLL.findById(0).getNume());
-        verify(clientDAO).findById(0);
+        when(clientBLL.findById(0)).thenReturn(new Client(0, "Default", "Default", "Default"));
+        assertEquals(clientDAO.findById(0).getNume(), clientBLL.findById(0).getNume());
+        verify(clientBLL).findById(0);
     }
 }

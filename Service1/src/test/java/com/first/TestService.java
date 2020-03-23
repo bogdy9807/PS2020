@@ -25,13 +25,12 @@ public class TestService {
     @Before
     public void init(){
         serviceDAO = new ServiceDAO();
-        serviceBLL = new ServiceBLL(serviceDAO);
     }
 
     @Test
     public void testFindById(){
-        when(serviceDAO.findById(0)).thenReturn(new Service(0,0,"Default","Default"));
-        assertEquals("Default",serviceBLL.findById(0));
-        verify(serviceDAO).findById(0);
+        when(serviceBLL.findById(0)).thenReturn(new Service(0,0,"Default","Default"));
+        assertEquals(serviceDAO.findById(0).getNume(),serviceBLL.findById(0).getNume());
+        verify(serviceBLL).findById(0);
     }
 }

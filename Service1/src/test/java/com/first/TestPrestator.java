@@ -25,13 +25,12 @@ public class TestPrestator {
     @Before
     public void init(){
         prestatorDAO = new PrestatorDAO();
-        prestatorBLL = new PrestatorBLL(prestatorDAO);
     }
 
     @Test
     public void testFindById(){
         when(prestatorBLL.findById(0)).thenReturn(new Prestator(0,"Default","Default","Default"));
-        assertEquals("Default",prestatorBLL.findById(0).getNume());
-        verify(prestatorDAO).findById(0);
+        assertEquals(prestatorDAO.findById(0).getNume(),prestatorBLL.findById(0).getNume());
+        verify(prestatorBLL).findById(0);
     }
 }

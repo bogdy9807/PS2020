@@ -40,3 +40,7 @@ Baza de date a fost construita folosing MySQL, iar conectarea la Intellij a fost
 ## Implementare
 
 S-au construit clasele aferente utilizatorulor si inca o clasa de login care ne ajuta sa diferentiem utilizatorii. Accesul la informatiile din baza de date este facut prin metodele din clasele ce se afla in pachetul 'dao'.
+
+## Diagrama bazei de datelor
+
+![](diagrama_BD.png)

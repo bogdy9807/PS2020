@@ -24,13 +24,12 @@ public class TestProgramariService {
     @Before
     public void init(){
         programariServiceDAO = new ProgramariServiceDAO();
-        programariServiceBLL = new ProgramariServiceBLL(programariServiceDAO);
     }
 
     @Test
     public void testFindById(){
-        when(programariServiceDAO.findById(0)).thenReturn(new ProgramariService(0,0,0,"Default","Default",0,"Default"));
-        assertEquals("Default",programariServiceBLL.findById(0).getData_creare());
-        verify(programariServiceDAO).findById(0);
+        when(programariServiceBLL.findById(0)).thenReturn(new ProgramariService(0,0,0,"Default","Default",0,"Default"));
+        assertEquals(programariServiceDAO.findById(0).getData_creare(),programariServiceBLL.findById(0).getData_creare());
+        verify(programariServiceBLL).findById(0);
     }
 }
