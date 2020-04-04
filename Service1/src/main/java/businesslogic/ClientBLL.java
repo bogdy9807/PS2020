@@ -31,4 +31,12 @@ public class ClientBLL {
     public void insert(Client x) {
         clientDAO.insert(x);
     }
+
+    public void deleteById(int id){
+        clientDAO.deleteById(id);
+    }
+
+    public void update(Client x){
+        clientDAO.update(x);
+    }
 }

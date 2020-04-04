@@ -12,10 +12,10 @@ Practic prestatorii sunt patronii de service.
 
 Actorii din aceasta platforma sunt:
 
-1. clientii
-1. prestatorii
-1. vizitatorii
-1. administratorul
+-	 Clientii
+-	 Prestatorii
+-	 Vizitatorii
+-	 Administratorul
 
 ### Administraror
 
@@ -35,12 +35,21 @@ Vizitatorul, adica utilizator temporar, va putea doar vizita magazinul si sa viz
 
 ## Unelte folosite
 
-Baza de date a fost construita folosing MySQL, iar conectarea la Intellij a fost facuta prin documentul .jar din folderun BDConnection. Conectarea web este facuta prin springboot.
+-	 Baza de date a fost construita folosing MySQL, iarconectarea la Intellij a fost facuta prin documentul .jar din folderul BDConnection.
+-	 Conectarea web este facuta prin springboot.
+-	 Testele JUnit se fac folosind Mockito.
 
 ## Implementare
 
-S-au construit clasele aferente utilizatorulor si inca o clasa de login care ne ajuta sa diferentiem utilizatorii. Accesul la informatiile din baza de date este facut prin metodele din clasele ce se afla in pachetul 'dao'.
+S-au construit clasele aferente utilizatorulor si inca o clasa de login care ne ajuta sa diferentiem utilizatorii. Accesul la informatiile din baza de date este facut prin metodele din clasele ce se afla in pachetul 'dao'. In acest pachet exista o clasa generica AbstractDAO prin care obtinem majoritatea datelor. Aceasta clasa creeaza o conexiune la baza de date si obtine datele prin executarea unui query asupra bazei de date, iar obiectele le construieste folosind reflexia. Taote celelalte clase din pachetul dao folosesc clasa AbstractDAO.
 
 ## Diagrama bazei de date
 
 ![](diagrama_BD.png)
+
+## Diagrama Design Pattern-ului Observer
+
+-	Pentru a notifica prestatorii cand au primit cereri de programare de la clienti, am implementat design pattern-ul observer astfel: Clasa prestator este observer-ul care primeste update atunci cand se emite o cerere. Emitatorul este clasa principala in care se creeaza cererea.
+-	In clasa PrestatorBLL exista o tupla de programari neconfirmate de tipul (id,listaProgramari) unde id corespunde id-ului prestatorului din baza de date caruia ii apartine lista de programari neconfirmate. La update, aceasta lista se va actualiza si se va adauga cererea noua.
+
+![](diagObs.png)

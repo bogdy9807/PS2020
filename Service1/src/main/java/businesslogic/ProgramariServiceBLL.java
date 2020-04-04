@@ -43,4 +43,8 @@ public class ProgramariServiceBLL {
     public void deleteByServiceId(int id) {
         programariServiceDAO.deleteByServiceId(id);
     }
+
+    public void update(ProgramariService x){
+        programariServiceDAO.update(x);
+    }
 }

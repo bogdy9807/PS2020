@@ -50,5 +50,4 @@ public class Prestator {
         this.email = email;
     }
 
-
 }

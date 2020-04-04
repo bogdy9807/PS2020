@@ -25,4 +25,16 @@ public class LoginBLL {
         loginDAO.insert(x);
     }
 
+    public void deleteById(int id){
+        loginDAO.deleteById(id);
+    }
+
+    public void update(Login x){
+        loginDAO.update(x);
+    }
+
+    public Login findById(int id){
+        return loginDAO.findById(id);
+    }
+
 }

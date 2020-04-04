@@ -9,6 +9,8 @@ public class ServiceBLL {
 
     private ServiceDAO serviceDAO;
 
+
+
     public ServiceBLL() {
         serviceDAO = new ServiceDAO();
     }
@@ -39,5 +41,9 @@ public class ServiceBLL {
 
     public void deleteById(int id) {
         serviceDAO.deleteById(id);
+    }
+
+    public void update(Service x){
+        serviceDAO.update(x);
     }
 }
