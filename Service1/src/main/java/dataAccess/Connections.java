@@ -9,7 +9,7 @@ import java.util.logging.Logger;
  *
  */
 public class Connections {
-    private static final String PASSWORD = "Destruct#10";
+    private static final String PASSWORD = "";
     private static final String USERNAME = "root";
 
     private static final String CONNECTION_STRING = "jdbc:mysql://localhost:3306/new_schema";
