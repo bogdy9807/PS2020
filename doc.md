@@ -53,3 +53,14 @@ S-au construit clasele aferente utilizatorulor si inca o clasa de login care ne 
 -	In clasa PrestatorBLL exista o tupla de programari neconfirmate de tipul (id,listaProgramari) unde id corespunde id-ului prestatorului din baza de date caruia ii apartine lista de programari neconfirmate. La update, aceasta lista se va actualiza si se va adauga cererea noua.
 
 ![](diagObs.png)
+
+## Diagrama Pattern-ului Strategy
+
+-	Pattern-ul strategy se foloseste pentru a selecta, din mai multi algoritmi, unul singur care va efectua cerintele contextului in care este aplicat. Clientul va vedea doar rezultatul fara sa stie ce algoritm este utilizat.
+- 	Contextul in care acest pattern este folosit in proiect este in cazul afisarii programarilor. Daca unser-ul logat este un prestator, atunci ar trebui sa-i afisam programarile care implica service-urile pe care acesta le detine, iar daca user-ul logat este client, atunci o sa-i afisam programarile pe care acesta si le-a facut.
+-	Pentru aceste cerinte am implementat interfata ShowBooksStrategy in care se mentioneaza metoda showBooks ce are ca parametru un obiect de tipul ProgramariServiceBLL si un integer numit id. Aceasta metoda returneaza un ArrayList de obiecte de tip ProgramariService ce reprezinta lista programarilor care vor fi afisate. Mai departe avem doua clase ShowClientBooks si ShowPrestatorBooks care implementeaza interfata ShowBooksStrategy si definesc metoda showBooks.
+-	In clasa ShowClientBooks, metoda returneaza, cu ajutorul obiectului de tip ProgramariServiceBLL, programarile ce au ca si id al clientului, id-ul clientului conectat, folosind metoda selectByClientId definita in clasa ProgramariServiceBLL.
+-	In clasa ShowPrestatorBooks, metoda showBooks cauta prima data toate service-urile prestatorului cu id-ul primit ca parametru si apoi creeaza o lista din toate programarile care implica aceste service-uri, dupa care o returneaza. Se foloseste metoda selectByIdService definita in clasa ProgramariServiceBLL.
+-	In clasa SampleController avem o instanta a interfetei ShowBooksStrategy care va fi un obiect de tipul ShowClientBooks sau ShowPrestatorBooks in functie de user-ul care s-a logat folosind metoda login. Dupa logare, se poate folosi metoda showBooks care va afisa toate programarile, stiind pe care sa le aleaga datorita interfetei ShowBooksStrategy.
+
+![](diagStrategyPattern.png)

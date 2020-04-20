@@ -3,10 +3,7 @@ package com.first;
 import businesslogic.*;
 import model.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -21,6 +18,20 @@ class DemoApplication {
     private LoginBLL loginBLL;
     private Login login;
     private Client client;
+    private Prestator prestator;
+    private int userID;
+    private Client registerClient;
+    private Prestator registerPrestator;
+
+    public ShowBooksStrategy getShowBooksStrategy() {
+        return showBooksStrategy;
+    }
+
+    public void setShowBooksStrategy(ShowBooksStrategy showBooksStrategy) {
+        this.showBooksStrategy = showBooksStrategy;
+    }
+
+    private ShowBooksStrategy showBooksStrategy;
 
     private ArrayList<ObserverProgramari> observers;
 
@@ -195,6 +206,14 @@ class DemoApplication {
         clientBLL.deleteById(id);
     }
 
+    @PostMapping("/deleteLogin")
+    public void deleteLogin(@RequestBody int id){
+        if(loginBLL.findById(id) == null){
+            return;
+        }
+        loginBLL.deleteById(id);
+    }
+
     @PostMapping("/deleteService")
     public void deleteService(@RequestBody int id){
         if(serviceBLL.findById(id) == null){
@@ -219,5 +238,91 @@ class DemoApplication {
         programariServiceBLL.deleteById(id);
     }
 
+    @PostMapping("/login")
+    public void login(@RequestParam(value="username") String username,@RequestParam(value="password") String password){
+        boolean found = false;
+        ArrayList<Login> loginData = loginBLL.selectAll();
+        for(Login x: loginData){
+            if(username.compareTo(x.getUsername()) == 0 && password.compareTo(x.getPassword()) == 0) {
+                found = true;
+                if (x.getUsertype() == 1) {
+                    userID = x.getId_client();
+                    client = clientBLL.findById(userID);
+                    showBooksStrategy = new ShowClientBooks();
+                } else {
+                    if (x.getUsertype() == 2) {
+                        userID = x.getId_prestator();
+                        prestator = prestatorBLL.findById(userID);
+                        showBooksStrategy = new ShowPrestatorBooks();
+                    }
+                }
+            }
+        }
+        if(!found){
+            System.out.println("Username " + username + " or password  " + password + " incorrect");
+        }
+    }
 
+    @GetMapping("/showBooks")
+    public ArrayList<ProgramariService> showBooks(){
+        if(showBooksStrategy == null){
+            return null;
+        }
+        return showBooksStrategy.showBooks(programariServiceBLL,userID);
+    }
+
+    @PostMapping("/register")
+    public void register(@RequestBody Login x){
+        int maxID = -1;
+        for(Login y: loginBLL.selectAll()){
+            if(y.getId() > maxID){
+                maxID = y.getId();
+            }
+        }
+        x.setId(maxID+1);
+        if(x.getUsertype() == 1){
+            if(registerClient == null){
+                return;
+            }
+            clientBLL.insert(registerClient);
+            x.setId_client(registerClient.getId());
+            x.setId_prestator(0);
+            loginBLL.insert(x);
+        }
+        else{
+            if(x.getUsertype() == 2){
+                if(registerPrestator == null){
+                    return;
+                }
+                prestatorBLL.insert(registerPrestator);
+                x.setId_prestator(registerPrestator.getId());
+                x.setId_client(0);
+                loginBLL.insert(x);
+            }
+        }
+    }
+
+    @PostMapping("/registerClient")
+    public void registerClient(@RequestBody Client x){
+        int maxID = -1;
+        for(Client y: clientBLL.selectAll()){
+            if(y.getId() > maxID){
+                maxID = y.getId();
+            }
+        }
+        x.setId(maxID+1);
+        registerClient = x;
+    }
+
+    @PostMapping("/registerPrestator")
+    public void registerPrestator(@RequestBody Prestator x){
+        int maxID = -1;
+        for(Prestator y: prestatorBLL.selectAll()){
+            if(y.getId() > maxID){
+                maxID = y.getId();
+            }
+        }
+        x.setId(maxID+1);
+        registerPrestator = x;
+    }
 }
