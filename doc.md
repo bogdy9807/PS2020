@@ -64,3 +64,10 @@ S-au construit clasele aferente utilizatorulor si inca o clasa de login care ne 
 -	In clasa SampleController avem o instanta a interfetei ShowBooksStrategy care va fi un obiect de tipul ShowClientBooks sau ShowPrestatorBooks in functie de user-ul care s-a logat folosind metoda login. Dupa logare, se poate folosi metoda showBooks care va afisa toate programarile, stiind pe care sa le aleaga datorita interfetei ShowBooksStrategy.
 
 ![](diagStrategyPattern.png)
+
+## Diagrama de secventa
+
+- Diagrama de secventa  Diagrama de secventa descrie cronologic interactiunea obiectelor, identificand mesajele schimbate intre obiecte ca raspuns la un eveniment, impreuna cu secvența mesajelor. Diagramele secventiale cuprind obiectele care fac parte dintr-o anumita colaborare si descriu secventa de stimuli transmisi intre obiecte in cadrul unei interactiuni.
+- In aceasta diagrama prezentam sunt prezentate cateva functionalitati ale proiectului, dar de asemenea si faptele petrecute in urma utilizarii lor.
+
+![](diagSecvente.png)
